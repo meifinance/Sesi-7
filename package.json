@@ -1,0 +1,15 @@
+{
+  "name": "sesi7",
+  "version": "1.0.0",
+  "description": "",
+  "main": "sesi7.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fastify": "^4.28.0",
+    "pg": "^8.12.0"
+  }
+}
