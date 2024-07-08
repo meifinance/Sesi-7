@@ -32,6 +32,28 @@ read = async (data) => {
     }
 }
 
+read_by_id = async (data) => {
+    //const id = data
+    try {
+       const rows = await db.query(`SELECT * FROM ${schemaName}.students where student_id = $1`, [data]);
+        return rows.rows;
+    } catch (error) {
+        throw error;
+    }
+}
+
+
+read_by_name = async (data) => {
+    //const id = data
+    try {
+       const rows = await db.query(`SELECT * FROM ${schemaName}.students where student_name = $1`, [data]);
+        return rows.rows;
+    } catch (error) {
+        throw error;
+    }
+}
+
+
 
 // update data
 async function updateData() {
@@ -39,6 +61,25 @@ async function updateData() {
         ['Budi', 90, 90, 90, 1, 'A']
     );
 }
+
+// update nilai by student id
+async function updateDataNilai(data1,data2,data3,id) {
+    await db.query(`update ${schemaName}.students set math = $1, indonesian = $2, natural_sciences = $3 where student_id = $4 RETURNING *`, 
+        [data1,data2,data3,id]
+    );
+}
+
+async function Update_by_id(data1,data2,data3,id) {
+    //const id = data
+    try {
+       const rows = await db.query(`update ${schemaName}.students set math = $1, indonesian = $2, natural_sciences = $3 where student_id = $4 RETURNING *`, 
+       [data1,data2,data3,id]);
+        return rows.rows;
+    } catch (error) {
+        throw error;
+    }
+}
+
 
 
 //delete data
@@ -48,7 +89,14 @@ async function deleteData() {
     );
 }
 
+//delete data student id
+async function deleteDataId(id) {
+    await db.query(`delete from ${schemaName}.students where student_id = $1`,
+        [id]
+    );
+}
+
 
 module.exports = {
-    add, read, updateData, deleteData
+    add, read, updateData, deleteData, updateDataNilai, deleteDataId, Update_by_id
 };
